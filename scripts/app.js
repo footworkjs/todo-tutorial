@@ -24,6 +24,12 @@ require(['footwork'],
       template: 'scripts/templates/TodoForm' // loads scripts/templates/TodoForm.html
     });
 
+    /**
+     * Register the location of the 'MainRouter'
+     * Loads from scripts/MainRouter.js
+     */
+    fw.router.registerLocation('MainRouter', 'scripts/');
+
     // tell footwork to startup and begin binding
     fw.start();
   }

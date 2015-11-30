@@ -7,23 +7,29 @@
     <script>less = { env: "development" };</script>
     <script src="bower_components/less.js/dist/less.js"></script>
     <link rel="icon" href="images/favicon.png">
+
+    <!-- Force HTML4 (hash-based) routing -->
+    <script>window.History = { options: { html4Mode: true } };</script>
   </head>
 
   <body>
-    <main>
-      <todoform></todoform>
-      <viewModel module="TodoList">
-        <div class="todo-list">
-          <div class="todos" data-bind="foreach: todos">
-            <div class="todo">
-              <div class="status icon-check"></div>
-              <div class="text" data-bind="text: thingToDo"></div>
-              <div class="clear icon-x"></div>
+    <!-- new 'MainRouter' declaration -->
+    <router module="MainRouter">
+      <main>
+        <todoform></todoform>
+        <viewModel module="TodoList">
+          <div class="todo-list">
+            <div class="todos" data-bind="foreach: todos">
+              <div class="todo">
+                <div class="status icon-check"></div>
+                <div class="text" data-bind="text: thingToDo"></div>
+                <div class="clear icon-x"></div>
+              </div>
             </div>
           </div>
-        </div>
-      </viewModel>
-    </main>
+        </viewModel>
+      </main>
+    </router>
     <script src="bower_components/requirejs/require.js" data-main="scripts/app"></script>
   </body>
 </html>
