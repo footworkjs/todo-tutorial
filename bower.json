@@ -1,0 +1,14 @@
+{
+  "name": "footwork-todo-tutorial",
+  "version": "1.0.0",
+  "description": "footwork.js todo tutorial code",
+  "homepage": "http://todo-tutorial.footworkjs.com",
+  "author": "Jonathan Newman <jonathan@staticty.pe>",
+  "dependencies": {},
+  "devDependencies": {
+    "footwork": "1.0.0",
+    "less.js": "*",
+    "requirejs": "*",
+    "requirejs-text": "*"
+  }
+}
