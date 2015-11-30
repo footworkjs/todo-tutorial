@@ -12,8 +12,14 @@ requirejs.config({
 
 require(['footwork'],
   function(fw) {
-    // Tell footwork where it can find the TodoList viewModel.
-    fw.viewModel.registerLocation('TodoList', 'scripts/viewModels/');
+    /**
+     * Tell footwork it can find the 'LoginForm' and 'TodoList' viewModels
+     * inside of scripts/viewModel.
+     */
+    fw.viewModel.registerLocation([
+      'LoginForm', // will load from scripts/viewModels/LoginForm.js
+      'TodoList' // will load from scripts/viewModels/TodoList.js
+    ], 'scripts/viewModels/');
 
     /**
      * Here we provide the entire filename to footwork because the lowercase
