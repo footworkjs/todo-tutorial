@@ -2,25 +2,13 @@
 <viewModel module="TodoList">
   <div class="todo-list">
     <div class="todos" data-bind="foreach: todos">
-      <!-- css: binding adds isDone class when TodoItem is 'completed' (true) -->
+      <!-- css: binding adds isDone class when TodoItem is 'completed' -->
       <div class="todo" data-bind="css: { isDone: isDone }">
         <!-- click: binding toggles status of the TodoItem -->
         <div class="status icon-check" data-bind="click: toggleDone"></div>
         <div class="text" data-bind="text: thingToDo"></div>
-        <!-- click: binding which triggers the command to delete this TodoItem -->
-        <div class="clear icon-x" data-bind="click: deleteItem"></div>
+        <div class="clear icon-x"></div>
       </div>
     </div>
   </div>
-</viewModel>
-<viewModel module="Footer">
-  <footer>
-    <div class="num-todo">
-      <!-- text: binding which displays the number of remaining todo items -->
-      <span data-bind="text: numRemainingTodos"></span> items left
-    </div>
-
-    <!-- click: binding which will clear/delete the completed todo entries -->
-    <button class="button" data-bind="click: clearCompleted">Clear Completed</button>
-  </footer>
 </viewModel>
