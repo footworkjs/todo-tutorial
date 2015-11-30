@@ -1,12 +1,32 @@
 <todoform></todoform>
 <viewModel module="TodoList">
   <div class="todo-list">
-    <div class="todos" data-bind="foreach: todos">
-      <div class="todo">
-        <div class="status icon-check"></div>
+    <!-- foreach: binding now using the filteredTodos list -->
+    <div class="todos" data-bind="foreach: filteredTodos">
+      <!-- css: binding adds isDone class when TodoItem is 'completed' (true) -->
+      <div class="todo" data-bind="css: { isDone: isDone }">
+        <!-- click: binding toggles status of the TodoItem -->
+        <div class="status icon-check" data-bind="click: toggleDone"></div>
         <div class="text" data-bind="text: thingToDo"></div>
-        <div class="clear icon-x"></div>
+        <!-- click: binding which triggers the command to delete this TodoItem -->
+        <div class="clear icon-x" data-bind="click: deleteItem"></div>
       </div>
     </div>
   </div>
+</viewModel>
+<viewModel module="Footer">
+  <footer>
+    <div class="num-todo">
+      <!-- text: binding which displays the number of remaining todo items -->
+      <span data-bind="text: numRemainingTodos"></span> items left
+    </div>
+
+    <!-- Links which trigger the new states we need -->
+    <a data-bind="$route: { url: allRoute }">all</a>
+    <a data-bind="$route: { url: activeRoute }">active</a>
+    <a data-bind="$route: { url: completedRoute }">completed</a>
+
+    <!-- click: binding which will clear/delete the completed todo entries -->
+    <button class="button" data-bind="click: clearCompleted">Clear Completed</button>
+  </footer>
 </viewModel>

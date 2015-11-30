@@ -17,11 +17,14 @@ define(['footwork'],
          */
         this.loggedInUser = fw.observable(null).broadcastAs('loggedInUser');
 
+        // broadcast the state we wish to filter the list for
+        this.listFilter = fw.observable(null).broadcastAs('listFilter');
+
         // Create the event handler which receives the 'userLogin' event (and corresponding userName)
         this.$namespace.event.handler('userLogin', function(username) {
           // Tell the router to route to '/todo/username' if we have a username
           if(username) {
-            router.setState('/todo/' + username);
+            router.setState('/todo/' + username + '/all');
           }
         });
       },
@@ -39,11 +42,14 @@ define(['footwork'],
           }
         },
         {
-          route: '/todo/:username', // defines a required parameter 'username'
+          route: '/todo/:username(/:state)', // required parameter 'username', optional parameter 'state'
           title: 'Todo List',
-          controller: function(username) {
+          controller: function(username, state) {
             // set the loggedInUser value to the username
             this.loggedInUser(username);
+
+            // set the listFilter value to the supplied state (will be broadcast to the TodoList)
+            this.listFilter(state || 'all');
 
             // show our todo list page here
             this.outlet('mainView', 'todo-page');
