@@ -1,5 +1,6 @@
 <form class="todo" data-bind="submit: submitForm">
-  <div class="icon-chevron-down"></div>
+  <!-- click: and css: bindings on .icon-chevron-down are for the 'mark all' functionality -->
+  <div class="icon-chevron-down" data-bind="click: markAll, css: { allAreMarked: allMarked }"></div>
   <input type="text" name="thingToDo" data-bind="value: thingToDo" placeholder="What needs to be done?" autofocus>
   <input type="submit" value="Add Item" class="button">
 </form>
