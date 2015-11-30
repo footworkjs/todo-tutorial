@@ -8,7 +8,6 @@ define(['footwork'],
           title: 'Todo Application Tutorial',
           controller: function() {
             // show our login page here
-            this.outlet('mainView', 'login-page');
           }
         },
         {
@@ -16,7 +15,6 @@ define(['footwork'],
           title: 'Todo List',
           controller: function() {
             // show our todo list page here
-            this.outlet('mainView', 'todo-page');
           }
         }
       ]
