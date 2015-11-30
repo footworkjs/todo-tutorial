@@ -11,59 +11,10 @@ define(['footwork', 'scripts/viewModels/TodoItem.js'],
         // broadcasts the number of remaining todos
         this.numRemainingTodos = fw.observable(0).broadcastAs('numRemainingTodos');
 
-        // receives the list filter value from the MainRouter
-        this.listFilter = fw.observable().receiveFrom('MainRouter', 'listFilter');
-
-        // filter the list of todo entries based on this.listFilter received from MainRouter
-        this.filteredTodos = fw.computed(function() {
-          var listFilter = this.listFilter();
-          var todoList = [];
-
-          // go through each todo entry and add it to the filtered todoList if appropriate
-          this.todos().forEach(function(todo) {
-            switch(listFilter) {
-              case 'active': // show only 'active' todo entries
-                if(!todo.isDone()) {
-                  todoList.push(todo);
-                }
-                break;
-
-              case 'completed': // show only 'completed' todo entries
-                if(todo.isDone()) {
-                  todoList.push(todo);
-                }
-                break;
-
-              default: // show all todo entries (no filter)
-                todoList.push(todo);
-                break;
-            }
-          });
-
-          // return the filtered todoList entries
-          return todoList;
-        }, this);
-
         // listen for any 'newItem' messages broadcast on our namespace.
         this.$namespace.subscribe('newItem', function(thingToDo) {
           // new thingToDo was received, lets create a new TodoItem based on it
-          self.todos.push( new TodoItem({ thingToDo: thingToDo }) );
-        });
-
-        // listen for any 'clearCompleted' commands broadcast on our namespace.
-        this.$namespace.command.handler('clearCompleted', function() {
-          // Create a list of the completed todos
-          var completedTodos = [];
-          self.todos().forEach(function(todo) {
-            if(todo.isDone()) {
-              completedTodos.push(todo);
-            }
-          });
-
-          // remove the completed todo entries
-          completedTodos.forEach(function(todo) {
-            todo.deleteItem();
-          });
+          self.todos.push( new TodoItem(thingToDo) );
         });
 
         // listen for any 'setAllAs' commands broadcast on our namespace.
