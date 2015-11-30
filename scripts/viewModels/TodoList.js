@@ -8,9 +8,6 @@ define(['footwork', 'scripts/viewModels/TodoItem.js'],
         // stores the list of TodoItem entries
         this.todos = fw.observableArray();
 
-        // broadcasts the number of remaining todos
-        this.numRemainingTodos = fw.observable(0).broadcastAs('numRemainingTodos');
-
         // listen for any 'newItem' messages broadcast on our namespace.
         this.$namespace.subscribe('newItem', function(thingToDo) {
           // new thingToDo was received, lets create a new TodoItem based on it
@@ -30,26 +27,6 @@ define(['footwork', 'scripts/viewModels/TodoItem.js'],
           // when a new deleteItem command is received delete it from the list of todos
           self.todos.remove(item);
         });
-
-        // This method computes the number of remaining todos
-        function computeRemainingTodos() {
-          // Loop over each todo and count the number that are !isDone().
-          var numRemaining = 0;
-          self.todos().forEach(function(todo) {
-            if(!todo.isDone()) {
-              numRemaining++;
-            }
-          });
-
-          // write the number of remaining todos to the numRemainingTodos broadcastable
-          self.numRemainingTodos(numRemaining);
-        }
-
-        // listen for any messages/commands which require us to compute the remaining todos.
-        this.$namespace.subscribe('itemChanged', computeRemainingTodos);
-        this.$namespace.subscribe('newItem', computeRemainingTodos);
-        this.$namespace.command.handler('setAllAs', computeRemainingTodos);
-        this.$namespace.command.handler('deleteItem', computeRemainingTodos);
       }
     });
   }

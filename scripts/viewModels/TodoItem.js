@@ -12,12 +12,6 @@ define(['footwork'],
         // store the state of the TodoItem (true = done, false = not done)
         this.isDone = fw.observable(false);
 
-        // Listen for any changes on the TodoItem isDone state
-        this.isDone.subscribe(function() {
-          // when it is changed publish an 'itemChanged' event to the TodoList
-          this.todoListNamespace.publish('itemChanged');
-        }, this);
-
         // toggle the state of this TodoItem
         this.toggleDone = function() {
           this.isDone(!this.isDone());
