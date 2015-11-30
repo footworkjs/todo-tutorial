@@ -15,9 +15,20 @@
   <body>
     <!-- new 'MainRouter' declaration -->
     <router module="MainRouter">
-      <header>
-        <div class="title">Things To Do...</div>
-      </header>
+      <viewModel module="Header">
+        <header>
+          <div class="title">Things To Do...</div>
+
+          <!-- display the loggedInUser and the Logout button if we have a value for it -->
+          <div data-bind="if: loggedInUser">
+            <!-- display the user name -->
+            <span class="username" data-bind="text: loggedInUser"></span>
+
+            <!-- new $route bound link -->
+            <a href="/" data-bind="$route" class="logout button">Logout</a>
+          </div>
+        </header>
+      </viewModel>
       <main>
         <!-- HTML replaced with <outlet> -->
         <outlet name="mainView"></outlet>
