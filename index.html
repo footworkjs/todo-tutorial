@@ -7,27 +7,27 @@
     <script>less = { env: "development" };</script>
     <script src="bower_components/less.js/dist/less.js"></script>
     <link rel="icon" href="images/favicon.png">
-
-    <!-- Force HTML4 (hash-based) routing -->
-    <script>window.History = { options: { html4Mode: true } };</script>
   </head>
 
   <body>
-    <!-- new 'MainRouter' declaration -->
-    <router module="MainRouter">
-      <viewModel module="Header">
-        <header>
-          <div class="title">Things To Do...</div>
-
-          <!-- new $route bound link -->
-          <a href="/" data-bind="$route" class="logout button">Logout</a>
-        </header>
+    <main>
+      <todoform></todoform>
+      <viewModel module="TodoList">
+        <div class="todo-list">
+          <div class="todos" data-bind="foreach: todos">
+            <div class="todo">
+              <div class="status icon-check"></div>
+              <div class="text" data-bind="text: thingToDo"></div>
+              <div class="clear icon-x"></div>
+            </div>
+          </div>
+        </div>
       </viewModel>
-      <main>
-        <!-- HTML replaced with <outlet> -->
-        <outlet name="mainView"></outlet>
-      </main>
-    </router>
-    <script src="bower_components/requirejs/require.js" data-main="scripts/app"></script>
+    </main>
+    <script src="bower_components/footwork/dist/footwork-all.js"></script>
+    <script src="scripts/viewModels/TodoForm.js"></script>
+    <script src="scripts/viewModels/TodoList.js"></script>
+    <script src="scripts/viewModels/TodoItem.js"></script>
+    <script src="scripts/app.js"></script>
   </body>
 </html>
