@@ -12,14 +12,8 @@ requirejs.config({
 
 require(['footwork'],
   function(fw) {
-    /**
-     * Tell footwork it can find the 'LoginForm' and 'TodoList' viewModels
-     * inside of scripts/viewModel.
-     */
-    fw.viewModel.registerLocation([
-      'LoginForm', // will load from scripts/viewModels/LoginForm.js
-      'TodoList' // will load from scripts/viewModels/TodoList.js
-    ], 'scripts/viewModels/');
+    // Tell footwork where it can find the TodoList viewModel.
+    fw.viewModel.registerLocation('TodoList', 'scripts/viewModels/');
 
     /**
      * Here we provide the entire filename to footwork because the lowercase
@@ -29,18 +23,6 @@ require(['footwork'],
       viewModel: 'scripts/viewModels/TodoForm', // loads scripts/viewModels/TodoForm.js
       template: 'scripts/templates/TodoForm' // loads scripts/templates/TodoForm.html
     });
-
-    /**
-     * Register the location of the 'MainRouter'
-     * Loads from scripts/MainRouter.js
-     */
-    fw.router.registerLocation('MainRouter', 'scripts/');
-
-    // Tell footwork it can find the login-page and todo-page inside of scripts/views/
-    fw.outlets.registerViewLocation([
-      'login-page', // will load from scripts/views/login-page.html
-      'todo-page' // will load from scripts/views/todo-page.html
-    ], 'scripts/views/');
 
     // tell footwork to startup and begin binding
     fw.start();
