@@ -11,8 +11,8 @@ define(['footwork'],
 
         this.username = fw.observable();
         this.loginUser = function() {
-          // Tell the MainRouter that a user has logged in
-          this.mainRouterNamespace.trigger('userLogin');
+          // Tell the MainRouter that a user has logged in (and provide the current username)
+          this.mainRouterNamespace.trigger('userLogin', this.username());
         };
       }
     });
